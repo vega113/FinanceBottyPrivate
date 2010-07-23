@@ -1,0 +1,99 @@
+<project name="Ant Build Script with Git Support">
+	<!-- ================================= 
+          target: backup_gwt              
+         ================================= -->
+	<target name="backup_gwt" description="backup gwt app configuration">
+		<mkdir dir="./bak_gwt"/>
+		<copy file="./src/com/example/portfoliobotty/client/feature/minimessages/MiniMessagesFeature.java" tofile="./bak_gwt/MiniMessagesFeature.java" overwrite="true">
+		</copy>
+		<copy file="./src/com/example/portfoliobotty/client/feature/minimessages/NeedsMiniMessages.java" tofile="./bak_gwt/NeedsMiniMessages.java" overwrite="true">
+		</copy>
+		<copy file="./src/com/example/portfoliobotty/client/inject/PorfolioModule.java" tofile="./bak_gwt/PorfolioModule.java" overwrite="true">
+		</copy>
+		<copy file="./src/com/example/portfoliobotty/client/request/WaveRequestServiceImpl.java" tofile="./bak_gwt/WaveRequestServiceImpl.java" overwrite="true">
+		</copy>
+		<copy file="./src/com/example/portfoliobotty/client/utils/PortfolioUtilsImpl.java" tofile="./bak_gwt/PortfolioUtilsImpl.java" overwrite="true">
+		</copy>
+		<copy file="./src/com/example/portfoliobotty/client/utils/PortfolioUtils.java" tofile="./bak_gwt/PortfolioUtils.java" overwrite="true">
+				</copy>
+		<copy file="./src/com/example/portfoliobotty/client/PortfolioBotty.java" tofile="./bak_gwt/PortfolioBotty.java" overwrite="true">
+		</copy>
+		<copy file="./src/com/example/portfoliobotty/PortfolioBotty.gwt.xml" tofile="./bak_gwt/PortfolioBotty.gwt.xml" overwrite="true">
+		</copy>
+		<copy file="./war/localdebug.html" tofile="./bak_gwt/localdebug.html" overwrite="true">
+		</copy>
+	</target>
+
+	<!-- ================================= 
+          target: restore_gwt              
+         ================================= -->
+	<target name="restore_gwt"  description="restore gwt app configuration">
+		<copy file="./bak_gwt/MiniMessagesFeature.java" tofile="./src/com/example/portfoliobotty/client/feature/minimessages/MiniMessagesFeature.java" overwrite="true">
+		</copy>
+		<copy file="./bak_gwt/NeedsMiniMessages.java" tofile="./src/com/example/portfoliobotty/client/feature/minimessages/NeedsMiniMessages.java" overwrite="true">
+		</copy>
+		<copy file="./bak_gwt/PorfolioModule.java" tofile="./src/com/example/portfoliobotty/client/inject/PorfolioModule.java" overwrite="true">
+		</copy>
+		<copy file="./bak_gwt/WaveRequestServiceImpl.java" tofile="./src/com/example/portfoliobotty/client/request/WaveRequestServiceImpl.java" overwrite="true">
+		</copy>
+		<copy file="./bak_gwt/PortfolioUtilsImpl.java" tofile="./src/com/example/portfoliobotty/client/utils/PortfolioUtilsImpl.java" overwrite="true">
+		</copy>
+		<copy file="./bak_gwt/PortfolioUtils.java" tofile="./src/com/example/portfoliobotty/client/utils/PortfolioUtils.java" overwrite="true">
+				</copy>
+		<copy file="./bak_gwt/PortfolioBotty.java" tofile="./src/com/example/portfoliobotty/client/PortfolioBotty.java" overwrite="true">
+		</copy>
+		<copy file="./bak_gwt/PortfolioBotty.gwt.xml" tofile="./src/com/example/portfoliobotty/PortfolioBotty.gwt.xml" overwrite="true">
+		</copy>
+		<copy file="./bak_gwt/localdebug.html" tofile="./war/localdebug.html" overwrite="true" failonerror="false">
+		</copy>
+	</target>
+
+
+	<!-- ================================= 
+		          target: backup_wave              
+		         ================================= -->
+	<target name="backup_wave" description="backup wave app configuration">
+		<copy file="./src/com/example/portfoliobotty/client/feature/minimessages/MiniMessagesFeature.java" tofile="./bak_wave/MiniMessagesFeature.java" overwrite="true">
+		</copy>
+		<copy file="./src/com/example/portfoliobotty/client/feature/minimessages/NeedsMiniMessages.java" tofile="./bak_wave/NeedsMiniMessages.java" overwrite="true">
+		</copy>
+		<copy file="./src/com/example/portfoliobotty/client/inject/PorfolioModule.java" tofile="./bak_wave/PorfolioModule.java" overwrite="true">
+		</copy>
+		<copy file="./src/com/example/portfoliobotty/client/request/WaveRequestServiceImpl.java" tofile="./bak_wave/WaveRequestServiceImpl.java" overwrite="true">
+		</copy>
+		<copy file="./src/com/example/portfoliobotty/client/utils/PortfolioUtilsImpl.java" tofile="./bak_wave/PortfolioUtilsImpl.java" overwrite="true">
+		</copy>
+		<copy file="./src/com/example/portfoliobotty/client/utils/PortfolioUtils.java" tofile="./bak_wave/PortfolioUtils.java" overwrite="true">
+				</copy>
+		<copy file="./src/com/example/portfoliobotty/client/PortfolioBotty.java" tofile="./bak_wave/PortfolioBotty.java" overwrite="true">
+		</copy>
+		<copy file="./src/com/example/portfoliobotty/PortfolioBotty.gwt.xml" tofile="./bak_wave/PortfolioBotty.gwt.xml" overwrite="true">
+		</copy>
+	</target>
+
+	<!-- ================================= 
+	          target: restore_wave              
+	         ================================= -->
+	<target name="restore_wave"  description="restore wave app configuration">
+		<mkdir dir="./bak_wave"/>
+		<copy file="./bak_wave/MiniMessagesFeature.java" tofile="./src/com/example/portfoliobotty/client/feature/minimessages/MiniMessagesFeature.java" overwrite="true">
+		</copy>
+		<copy file="./bak_wave/NeedsMiniMessages.java" tofile="./src/com/example/portfoliobotty/client/feature/minimessages/NeedsMiniMessages.java" overwrite="true">
+		</copy>
+		<copy file="./bak_wave/PorfolioModule.java" tofile="./src/com/example/portfoliobotty/client/inject/PorfolioModule.java" overwrite="true">
+		</copy>
+		<copy file="./bak_wave/WaveRequestServiceImpl.java" tofile="./src/com/example/portfoliobotty/client/request/WaveRequestServiceImpl.java" overwrite="true">
+		</copy>
+		<copy file="./bak_wave/PortfolioUtilsImpl.java" tofile="./src/com/example/portfoliobotty/client/utils/PortfolioUtilsImpl.java" overwrite="true">
+		</copy>
+		<copy file="./bak_wave/PortfolioUtils.java" tofile="./src/com/example/portfoliobotty/client/utils/PortfolioUtils.java" overwrite="true">
+				</copy>
+		<copy file="./bak_wave/PortfolioBotty.java" tofile="./src/com/example/portfoliobotty/client/PortfolioBotty.java" overwrite="true">
+		</copy>
+		<copy file="./bak_wave/PortfolioBotty.gwt.xml" tofile="./src/com/example/portfoliobotty/PortfolioBotty.gwt.xml" overwrite="true">
+		</copy>
+		<delete file="./war/localdebug.html">
+		</delete>
+	</target>
+</project>
+

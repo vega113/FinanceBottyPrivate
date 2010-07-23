@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" output="test-classes" path="test"/>
+	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER"/>
+	<classpathentry kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/guice-2.0.jar"/>
+	<classpathentry kind="lib" path="/DigestBottyNGadget/war/WEB-INF/lib/guice-servlet-2.0.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/home/vega/Downloads/guice-2.0.zip!/guice-2.0/javadoc"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/gdata-2.2.1-alpha.jar" sourcepath="war/WEB-INF/lib/gdata-2.2.1-alpha-src.zip"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/httpclient-4.0.1.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/httpcore-4.0.1.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/jackson-core-asl-1.5.2.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/kxml2-2.3.0.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/gdata-calendar-2.0.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/gdata-calendar-meta-2.0.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/gdata-client-1.0.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/gdata-client-meta-1.0.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/gdata-core-1.0.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/gdata-finance-2.0.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/gdata-finance-meta-2.0.jar"/>
+	<classpathentry kind="lib" path="/DigestBottyNGadget/war/WEB-INF/lib/gson-1.4.jar"/>
+	<classpathentry kind="lib" path="/DigestBottyNGadget/war/WEB-INF/lib/json.jar"/>
+	<classpathentry kind="lib" path="/WaveClick/war/WEB-INF/lib/gin-1.0.jar" sourcepath="/WaveClick/war/WEB-INF/lib/gin-1.0-src.zip"/>
+	<classpathentry kind="lib" path="/DigestBottyNGadget/war/WEB-INF/lib/gwt-gadgets.jar"/>
+	<classpathentry kind="lib" path="/DigestBottyNGadget/war/WEB-INF/lib/gwt-log-3.0.1.jar"/>
+	<classpathentry kind="lib" path="/DigestBottyNGadget/war/WEB-INF/lib/cobogwave-gadget-1.1.2.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/aopalliance.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/oauth-20090617.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/wave-model-20100528.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/wave-robot-api-20100528.jar" sourcepath="war/WEB-INF/lib/wave-robot-api-20100528-src.jar"/>
+	<classpathentry kind="output" path="war/WEB-INF/classes"/>
+</classpath>

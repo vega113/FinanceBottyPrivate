@@ -1,0 +1,42 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:with field='res'
+		type='com.example.portfoliobotty.client.resources.GlobalResources' />
+	<ui:with field='constants'
+		type='com.example.portfoliobotty.client.constants.PortfolioConstants' />
+	<g:HTMLPanel>
+		<g:VerticalPanel>
+			<g:DecoratorPanel>
+				<g:CaptionPanel ui:field="topCaption" captionText='{constants.gadgetTitleStr}'>
+					<g:VerticalPanel>
+						<g:HorizontalPanel>
+							<g:cell horizontalAlignment="ALIGN_CENTER">
+								<g:CaptionPanel captionText='{constants.portfolioDataStr}'>
+									<g:VerticalPanel ui:field="portfolioDataPanel"></g:VerticalPanel>
+								</g:CaptionPanel>
+							</g:cell>
+							<g:cell horizontalAlignment="ALIGN_CENTER">
+								<g:CaptionPanel ui:field="choosePortfolioCptn"
+									captionText='{constants.choosePortfolioStr}'>
+									<g:ListBox ui:field="portfoliosList"></g:ListBox>
+								</g:CaptionPanel>
+							</g:cell>
+						</g:HorizontalPanel>
+						<g:VerticalPanel>
+							<g:CaptionPanel ui:field="positionsDataCptn"
+								captionText='{constants.positionsDataStr}'>
+								<g:VerticalPanel>
+									<g:VerticalPanel ui:field="positionsTableHeaderPanel">
+									</g:VerticalPanel>
+									<g:VerticalPanel ui:field="positionsTableDataPanel">
+									</g:VerticalPanel>
+								</g:VerticalPanel>
+							</g:CaptionPanel>
+						</g:VerticalPanel>
+					</g:VerticalPanel>
+				</g:CaptionPanel>
+			</g:DecoratorPanel>
+		</g:VerticalPanel>
+	</g:HTMLPanel>
+</ui:UiBinder> 

@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?><Module><ModulePrefs author="Yuri Zelikov" author_email="vega113+financebotty@gmail.com" height="600" title="Wave Google Finance" width="600"><Require feature="dynamic-height"/><Require feature="minimessage"/><Require feature="analytics"/><Require feature="wave"/></ModulePrefs><Content type="html"><![CDATA[<script>function portfoliobotty(){
+  var $wnd_0 = window, $doc_0 = document, external_0 = $wnd_0.external, gwtOnLoad, bodyDone, base = '', metaProps = {}, values = [], providers = [], answers = [], onLoadErrorFunc, propertyErrorFunc, $stats = $wnd_0.__gwtStatsEvent?function(a){
+    return $wnd_0.__gwtStatsEvent(a);
+  }
+  :null;
+  if (!$wnd_0.__gwt_stylesLoaded) {
+    $wnd_0.__gwt_stylesLoaded = {};
+  }
+  if (!$wnd_0.__gwt_scriptsLoaded) {
+    $wnd_0.__gwt_scriptsLoaded = {};
+  }
+  function isHostedMode(){
+    try {
+      return external_0 && (external_0.gwtOnLoad && $wnd_0.location.search.indexOf('gwt.hybrid') == -1);
+    }
+     catch (e) {
+      return false;
+    }
+  }
+
+  function maybeStartModule(){
+    if (bodyDone) {
+      if (isHostedMode()) {
+        try {
+          external_0.gwtOnLoad($wnd_0, 'portfoliobotty', '1.5');
+        }
+         catch (e) {
+          $wnd_0.alert('external.gwtOnLoad failed: ' + e);
+        }
+      }
+       else if (gwtOnLoad) {
+        gwtOnLoad(onLoadErrorFunc, 'portfoliobotty', base, '1.5');
+      }
+    }
+  }
+
+  function computeScriptBase(){
+    base = _args()['url'];
+    base = base.substring(0, base.lastIndexOf('/') + 1);
+  }
+
+  function processMetas(){
+    var meta;
+    var prefs = new _IG_Prefs;
+    if (meta = prefs.getString('gwt:onLoadErrorFn')) {
+      try {
+        onLoadErrorFunc = eval(meta);
+      }
+       catch (e) {
+        alert('Bad handler "' + content + '" for "gwt:onLoadErrorFn"');
+      }
+    }
+    if (meta = prefs.getString('gwt:onPropertyErrorFn')) {
+      try {
+        propertyErrorFunc = eval(meta);
+      }
+       catch (e) {
+        alert('Bad handler "' + content + '" for "gwt:onPropertyErrorFn"');
+      }
+    }
+    if (meta = prefs.getArray('gwt:property')) {
+      for (var i = 0; i < meta.length; i++) {
+        var content = meta[i];
+        if (content) {
+          var value, eq = content.indexOf('=');
+          if (eq >= 0) {
+            name = content.substring(0, eq);
+            value = content.substring(eq + 1);
+          }
+           else {
+            name = content;
+            value = '';
+          }
+          metaProps[name] = value;
+        }
+      }
+    }
+  }
+
+  function setLocale(){
+    var args = $wnd_0.location.search;
+    var lang = extractFromQueryStr(args, 'lang');
+    if (lang != null) {
+      country = extractFromQueryStr(args, 'country');
+      if (country != null) {
+        $wnd_0.__gwt_Locale = lang + '_' + country;
+      }
+       else {
+        $wnd_0.__gwt_Locale = lang;
+      }
+    }
+  }
+
+  function extractFromQueryStr(args, argName){
+    var start = args.indexOf(argName + '=');
+    if (start < 0) {
+      return undefined;
+    }
+    var value = args.substring(start);
+    var valueBegin = value.indexOf('=') + 1;
+    var valueEnd = value.indexOf('&');
+    if (valueEnd == -1) {
+      valueEnd = value.length;
+    }
+    return value.substring(valueBegin, valueEnd);
+  }
+
+  function unflattenKeylistIntoAnswers(propValArray, value){
+    var answer = answers;
+    for (var i = 0, n = propValArray.length - 1; i < n; ++i) {
+      answer = answer[propValArray[i]] || (answer[propValArray[i]] = []);
+    }
+    answer[propValArray[n]] = value;
+  }
+
+  function computePropValue(propName){
+    var value = providers[propName](), allowedValuesMap = values[propName];
+    if (value in allowedValuesMap) {
+      return value;
+    }
+    var allowedValuesList = [];
+    for (var k in allowedValuesMap) {
+      allowedValuesList[allowedValuesMap[k]] = k;
+    }
+    if (propertyErrorFunc) {
+      propertyErrorFunc(propName, allowedValuesList, value);
+    }
+    throw null;
+  }
+
+  providers['user.agent'] = function(){
+    var ua = navigator.userAgent.toLowerCase();
+    var makeVersion = function(result){
+      return parseInt(result[1]) * 1000 + parseInt(result[2]);
+    }
+    ;
+    if (ua.indexOf('opera') != -1) {
+      return 'opera';
+    }
+     else if (ua.indexOf('webkit') != -1) {
+      return 'safari';
+    }
+     else if (ua.indexOf('msie') != -1) {
+      if (document.documentMode >= 8) {
+        return 'ie8';
+      }
+       else {
+        var result_0 = /msie ([0-9]+)\.([0-9]+)/.exec(ua);
+        if (result_0 && result_0.length == 3) {
+          var v = makeVersion(result_0);
+          if (v >= 6000) {
+            return 'ie6';
+          }
+        }
+      }
+    }
+     else if (ua.indexOf('gecko') != -1) {
+      var result_0 = /rv:([0-9]+)\.([0-9]+)/.exec(ua);
+      if (result_0 && result_0.length == 3) {
+        if (makeVersion(result_0) >= 1008)
+          return 'gecko1_8';
+      }
+      return 'gecko';
+    }
+    return 'unknown';
+  }
+  ;
+  values['user.agent'] = {gecko:0, gecko1_8:1, ie6:2, ie8:3, opera:4, safari:5};
+  portfoliobotty.onScriptLoad = function(gwtOnLoadFunc){
+    portfoliobotty = null;
+    gwtOnLoad = gwtOnLoadFunc;
+    maybeStartModule();
+  }
+  ;
+  computeScriptBase();
+  processMetas();
+  setLocale();
+  _IG_RegisterOnloadHandler(function(){
+    if (!bodyDone) {
+      bodyDone = true;
+      if (!__gwt_stylesLoaded['gwt/standard/standard.css']) {
+        __gwt_stylesLoaded['gwt/standard/standard.css'] = true;
+        document.write('<link rel="stylesheet" href="' + _IG_GetCachedUrl(base + 'gwt/standard/standard.css') + '">');
+      }
+      maybeStartModule();
+    }
+  }
+  );
+  if (isHostedMode()) {
+    $wnd_0.$wnd = $wnd_0;
+    $wnd_0.$doc = $doc_0;
+    $wnd_0.$moduleName = 'portfoliobotty';
+    $wnd_0.$moduleBase = base;
+    $wnd_0.__gwt_getProperty = computePropValue;
+    $wnd_0.__gwt_initHandlers = portfoliobotty.__gwt_initHandlers;
+    $wnd_0.__gwt_module_id = 0;
+    $wnd_0.fireOnModuleLoadStart = function(className){
+      $stats && $stats({moduleName:$moduleName, subSystem:'startup', evtGroup:'moduleStartup', millis:(new Date).getTime(), type:'onModuleLoadStart', className:className});
+    }
+    ;
+    $wnd_0.onunload = function(){
+      external_0.gwtOnLoad($wnd_0, null, '1.5');
+    }
+    ;
+  }
+   else {
+    var strongName;
+    try {
+      unflattenKeylistIntoAnswers(['ie8'], '261ADF174F360430F4D73ED5C2BACB95');
+      unflattenKeylistIntoAnswers(['safari'], '788C3A1D89B5DBCACB158A05D2C3DB06');
+      unflattenKeylistIntoAnswers(['gecko'], 'AA4B7C31088BD4FDDF30ED5F6E772A3A');
+      unflattenKeylistIntoAnswers(['ie6'], 'B72096F4FE295B8C1F35DA4453E9C69E');
+      unflattenKeylistIntoAnswers(['opera'], 'C65560D30AE5EA0A9282B13FF25082FE');
+      unflattenKeylistIntoAnswers(['gecko1_8'], 'E7ECBD18F5CB1D1A56EAB303E816BC6F');
+      strongName = answers[computePropValue('user.agent')];
+    }
+     catch (e) {
+      return;
+    }
+    if (!__gwt_scriptsLoaded['http://wave-api.appspot.com/public/wave.js']) {
+      __gwt_scriptsLoaded['http://wave-api.appspot.com/public/wave.js'] = true;
+      document.write('<script language="javascript" src="' + _IG_GetCachedUrl('http://wave-api.appspot.com/public/wave.js') + '"><\/script>');
+    }
+    var fullName = base + strongName;
+    if (fullName.search('.cache.js$') < 0) {
+      fullName = fullName.concat('.cache.js');
+    }
+    var loadFrom = _IG_GetCachedUrl(fullName, {refreshInterval:31536000});
+    $doc_0.write('<script src="' + loadFrom + '"><\/script>');
+  }
+}
+
+portfoliobotty.__gwt_initHandlers = function(resize, beforeunload, unload){
+  var $wnd_0 = window, oldOnResize = $wnd_0.onresize, oldOnBeforeUnload = $wnd_0.onbeforeunload, oldOnUnload = $wnd_0.onunload;
+  $wnd_0.onresize = function(evt){
+    try {
+      resize();
+    }
+     finally {
+      oldOnResize && oldOnResize(evt);
+    }
+  }
+  ;
+  $wnd_0.onbeforeunload = function(evt){
+    var ret, oldRet;
+    try {
+      ret = beforeunload();
+    }
+     finally {
+      oldRet = oldOnBeforeUnload && oldOnBeforeUnload(evt);
+    }
+    if (ret != null) {
+      return ret;
+    }
+    if (oldRet != null) {
+      return oldRet;
+    }
+  }
+  ;
+  $wnd_0.onunload = function(evt){
+    try {
+      unload();
+    }
+     finally {
+      oldOnUnload && oldOnUnload(evt);
+    }
+  }
+  ;
+}
+;
+portfoliobotty();
+</script>
+<div id="__gwt_gadget_content_div"></div>]]></Content></Module>
