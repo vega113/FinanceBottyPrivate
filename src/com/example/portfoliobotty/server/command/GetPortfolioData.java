@@ -47,7 +47,7 @@ public class GetPortfolioData extends Command {
 	      throw new IllegalArgumentException("Missing required param: user. " +"\n" + sb.toString());
 	    }
 	    TokenData tokenData = tokenDao.retrTokenByUser(userId);
-	    if(tokenData == null) throw new IllegalArgumentException("No authenthication token for: " + userId + ", please go to /LoginServlet to register with service! ");
+	    if(tokenData == null) throw new IllegalArgumentException("NO_USER" + "No authenthication token for: " + userId + ", please go to /LoginServlet to register with service! ");
 	    String token = tokenDao.retrTokenByUser(userId).getToken();
 	    FinanceService service = gfService.loginAndReturnService(token);
 	    List<Portfolio> portfolios = null;

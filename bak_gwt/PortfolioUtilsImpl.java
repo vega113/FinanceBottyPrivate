@@ -125,7 +125,7 @@ public class PortfolioUtilsImpl implements PortfolioUtils {
 	}
 	
 	public String retrUserId() {
-		return "vega113";
+		return "vega113@googlewave.com";
 		
 	}
 	public String retrUserName() {
@@ -149,7 +149,7 @@ public class PortfolioUtilsImpl implements PortfolioUtils {
 	}
 	@Override
 	public String retrHostId() {
-		return "vega113";
+		return "vega114@googlewave.com";
 	}
 	
 	

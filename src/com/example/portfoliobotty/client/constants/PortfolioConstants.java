@@ -37,6 +37,13 @@ public interface PortfolioConstants extends Constants {
 	
 	String updatingStr();
 	
+	String registerStr();
+	String pleaseRegisterStr();
+	String registerBtnStr();
+	
+	@DefaultStringValue(value="financebotty")
+	String appdomain();
+	
 	@DefaultStringValue(value="60px")
 	String cellWidth();
 }

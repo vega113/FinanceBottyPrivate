@@ -772,7 +772,7 @@ public class FinancePortfoliosClient {
   }
   
   public static Portfolio initPortfolioEntry(PortfolioEntry portfolioEntry) {
-	  LOG.info ("\nPortfolio Entry\n---------------");
+	  LOG.fine ("\nPortfolio Entry\n---------------");
 	  List<Position> positions = new ArrayList<Position>();
 	  if (portfolioEntry.getFeedLink().getFeed() == null) {
 		  LOG.warning("\tNo Position feed.");
@@ -803,28 +803,28 @@ public class FinancePortfoliosClient {
 	  String title = portfolioEntry.getTitle().getPlainText();
 	  double costBasis = 0;
 	  if (portfolioData.getCostBasis() == null) {
-		  LOG.warning ("\t\tCost Basis not specified");
+		  LOG.fine ("\t\tCost Basis not specified");
 	  } else {
 		  Money m = portfolioData.getCostBasis().getMoney().get(0);
 		  costBasis = m.getAmount();
 	  }
 	  double daysGain = 0;
 	  if (portfolioData.getDaysGain() == null) {
-		  LOG.warning ("\t\tDay's Gain not specified");
+		  LOG.fine ("\t\tDay's Gain not specified");
 	  } else {
 		  Money m = portfolioData.getDaysGain().getMoney().get(0);
 		  daysGain = m.getAmount();
 	  }
 	  double gain = 0;
 	  if (portfolioData.getGain() == null) {
-		  LOG.warning("\t\tTotal Gain not specified");
+		  LOG.fine("\t\tTotal Gain not specified");
 	  } else {
 		  Money m = portfolioData.getGain().getMoney().get(0);
 		  gain = m.getAmount();
 	  }
 	  double marketValue = 0;
 	  if (portfolioData.getMarketValue() == null) {
-		  LOG.warning("\t\tMarket Value not specified");
+		  LOG.fine("\t\tMarket Value not specified");
 	  } else {
 		  Money m = portfolioData.getMarketValue().getMoney().get(0);
 		  marketValue = m.getAmount();
@@ -862,28 +862,28 @@ public class FinancePortfoliosClient {
     
     double costBasis = 0;
     if (positionData.getCostBasis() == null) {
-      LOG.warning ("\t\tCost Basis not specified");
+      LOG.fine ("\t\tCost Basis not specified");
     } else {
     	 Money m = positionData.getCostBasis().getMoney().get(0);
     	 costBasis = m.getAmount();
     }
     double daysGain = 0;
     if (positionData.getDaysGain() == null) {
-    	LOG.warning ("\t\tDay's Gain not specified");
+    	LOG.fine ("\t\tDay's Gain not specified");
     } else {
     	Money m = positionData.getDaysGain().getMoney().get(0);
     	daysGain = m.getAmount();
     }
     double gain = 0;
     if (positionData.getGain() == null) {
-    	LOG.warning("\t\tTotal Gain not specified");
+    	LOG.fine("\t\tTotal Gain not specified");
     } else {
     	 Money m = positionData.getGain().getMoney().get(0);
     	 gain = m.getAmount();
     }
     double marketValue = 0;
     if (positionData.getMarketValue() == null) {
-    	LOG.warning("\t\tMarket Value not specified");
+    	LOG.fine("\t\tMarket Value not specified");
     } else {
     	Money m = positionData.getMarketValue().getMoney().get(0);
     	marketValue = m.getAmount();

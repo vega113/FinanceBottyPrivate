@@ -13,6 +13,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.http.client.RequestException;
 import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.json.client.JSONArray;
@@ -47,21 +48,26 @@ public class PortfolioPanel extends Composite {
 	PortfolioUtils utils;
 
 	@UiField
-	CaptionPanel choosePortfolioCptn;
-	@UiField
 	CaptionPanel topCaption;
 	@UiField
 	ListBox portfoliosList;
-//	@UiField
-//	CaptionPanel portfolioDetailsCptn;
 	@UiField
 	VerticalPanel portfolioDataPanel;
-	@UiField
-	CaptionPanel positionsDataCptn;
 	@UiField
 	VerticalPanel positionsTableHeaderPanel;
 	@UiField
 	VerticalPanel positionsTableDataPanel;
+	
+	@UiField
+	CaptionPanel registerCptn;
+	@UiField
+	CaptionPanel portfolioDataCptn;
+	@UiField
+	CaptionPanel choosePortfolioCptn;
+	@UiField
+	CaptionPanel positionsDataCptn;
+	@UiField
+	Button registerBtn;
 	
 	private final Map<String,JSONValue> jsonResultMap =  new HashMap<String, JSONValue>();
 	
@@ -70,7 +76,7 @@ public class PortfolioPanel extends Composite {
 	public PortfolioPanel(final PortfolioService service, final PortfolioUtils utils, final PortfolioConstants constants, final PortfolioMessages messages, final GlobalResources resources) {
 		this.utils = utils;
 		initWidget(uiBinder.createAndBindUi(this));
-		Log.info("PortfolioPanel utils: " + utils);
+		registerCptn.setVisible(false);
 		portfoliosList.addChangeHandler(new ChangeHandler() {
 			
 			@Override
@@ -96,8 +102,8 @@ public class PortfolioPanel extends Composite {
 				loadFinanceData(service, utils, constants, messages, resources, utils.retrHostId());
 			}
 		};
-		timer.schedule(5000);
-		timer.schedule(15000);
+		timer.schedule(1000);
+		timer.scheduleRepeating(20000);
 	}
 
 
@@ -134,8 +140,22 @@ public class PortfolioPanel extends Composite {
 				@Override
 				public void onFailure(Throwable caught) {
 					utils.dismissStaticMessage();
-					String message = caught.getMessage().substring(0, Math.min(200, caught.getMessage().length()));
-					utils.alert(message);
+					if(caught.getMessage() != null && caught.getMessage().indexOf("NO_USER") > -1){
+						hideDataCaptions();
+						registerCptn.setVisible(true);
+						registerBtn.addClickHandler(new ClickHandler() {
+							
+							@Override
+							public void onClick(ClickEvent event) {
+//								Window.open("http://" + constants.appdomain() + ".appspot.com/LoginServlet?user=" + utils.retrHostId(), "", "");
+								Window.open("http://localhost:8888/LoginServlet?user=" + utils.retrHostId(), "", "");
+							}
+						});
+					}else{
+						String message = caught.getMessage().substring(0, Math.min(200, caught.getMessage().length()));
+						utils.alert(message);
+					}
+					
 				}
 			});
 		} catch (RequestException e) {
@@ -275,12 +295,20 @@ public class PortfolioPanel extends Composite {
 
 	protected void populateProjectsList(JSONArray portfolios) {
 		int size = portfolios.size();
+		String selectedValue = null;
+		if(size > 0 && portfoliosList.getSelectedIndex() > 0){
+			selectedValue = portfoliosList.getValue(portfoliosList.getSelectedIndex());
+		}
+		portfoliosList.clear();
 		try{
 			for(int i = 0; i< size; i++){
 				JSONObject portfolioJson = portfolios.get(i).isObject();
 				String portfolioName = portfolioJson.get("title").isString().stringValue();
 				String id = portfolioJson.get("portfolioId").isString().stringValue();
 				portfoliosList.addItem(portfolioName,id);
+				if(id.equals(selectedValue)){
+					portfoliosList.setSelectedIndex(i);
+				}
 			}
 		}catch(Exception e){
 			Log.error("", e);
@@ -306,9 +334,13 @@ public class PortfolioPanel extends Composite {
 			positionsTableDataPanel.add(positionsDataFlexTable);
 			utils.adjustHeight();
 		}catch (RuntimeException e) {
-			Log.warn("rethrowin exception in loadPortfoliosPanel");
-			throw e;
+			Log.warn("exception in loadPortfoliosPanel");
 		}
 	}
-
+	
+	private void hideDataCaptions(){
+		portfolioDataCptn.setVisible(false);
+		choosePortfolioCptn.setVisible(false);
+		positionsDataCptn.setVisible(false);
+	}
 }

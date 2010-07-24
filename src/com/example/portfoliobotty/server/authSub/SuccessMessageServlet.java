@@ -43,7 +43,7 @@ public class SuccessMessageServlet extends HttpServlet {
 			paramsJson.put("user", principal);
 			postDataJson.put("params", paramsJson);
 			JSONObject json = handleGetRequest(postDataJson.toString());
-			if(json.get("error") == null){
+			if(!json.isNull("error")){
 				resp.getWriter().print("Error, please retry!");
 				resp.getWriter().flush();
 			}else{

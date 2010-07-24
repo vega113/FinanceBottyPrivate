@@ -60,6 +60,10 @@ public class LoginServlet extends HttpServlet {
 	    // the main page
 	    if (authSubToken == null) {
 	      continueUrl.append("/HandleTokenServlet");
+	      
+	    String user = req.getParameter("user");
+	    if(user != null)
+	    	continueUrl.append("?user=" + user);
 
 	      // Check whether to use https for authentication
 	      boolean secure = (Utility.getPrivateKey() != null);

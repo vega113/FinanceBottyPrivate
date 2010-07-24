@@ -100,7 +100,7 @@ public class HandleTokenServlet extends HttpServlet {
 				AuthSubUtil.getTokenInfo(sessionToken, Utility.getPrivateKey());
 			for (Iterator<String> iter = info.keySet().iterator(); iter.hasNext();) {
 				String key = iter.next();
-				System.out.println("\t(key, value): (" + key + ", " + info.get(key)
+				LOG.fine("\t(key, value): (" + key + ", " + info.get(key)
 						+ ")");
 			}
 		} catch (IOException e1) {
@@ -117,8 +117,9 @@ public class HandleTokenServlet extends HttpServlet {
 					e.getMessage());
 			return;
 		}
-
-		String user = handleToken(sessionToken);
+		
+		String user = req.getParameter("user");
+		user = handleToken(sessionToken,user);
 
 		StringBuffer continueUrl = req.getRequestURL();
 		int index = continueUrl.lastIndexOf("/");
@@ -127,15 +128,16 @@ public class HandleTokenServlet extends HttpServlet {
 		resp.sendRedirect(continueUrl.toString() + "?user="+user);
 	}
 
-	private String handleToken(String sessionToken) throws MalformedURLException,
+	private String handleToken(String sessionToken, String user) throws MalformedURLException,
 	IOException {
 		//now need to retrieve the user 
 		FinanceService service = gFinanceService.loginAndReturnService(sessionToken);
-		String user = null;
-		try {
-			user = gFinanceService.retrUserFromPortfolioFeed(service);
-		} catch (ServiceException e) {
-			LOG.log(Level.SEVERE,"",e);
+		if(user == null || "".equals(user)){
+			try {
+				user = gFinanceService.retrUserFromPortfolioFeed(service);
+			} catch (ServiceException e) {
+				LOG.log(Level.SEVERE,"",e);
+			}
 		}
 
 		// save the token

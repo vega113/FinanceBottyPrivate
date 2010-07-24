@@ -1,34 +1,33 @@
 package com.example.portfoliobotty.client.utils;
 
-import org.cobogw.gwt.waveapi.gadget.client.WaveFeature;
-
-import com.allen_sauer.gwt.log.client.Log;
-import com.example.portfoliobotty.client.feature.minimessages.MiniMessagesFeature;
-import com.google.gwt.gadgets.client.AnalyticsFeature;
-import com.google.gwt.gadgets.client.DynamicHeightFeature;
+//import org.cobogw.gwt.waveapi.gadget.client.WaveFeature;
+//import com.example.portfoliobotty.client.feature.minimessages.MiniMessagesFeature;
+//import com.google.gwt.gadgets.client.AnalyticsFeature;
+//import com.google.gwt.gadgets.client.DynamicHeightFeature;
 import java.util.HashMap;
 import java.util.Map;
 import com.google.gwt.user.client.Window;
-import com.google.inject.Inject;
 
 
 public class PortfolioUtilsImpl implements PortfolioUtils {
-	private WaveFeature wave;
-	private DynamicHeightFeature height;
-	private MiniMessagesFeature messages;
-	private AnalyticsFeature analytics;
-	
-	
-	@Inject
-	public PortfolioUtilsImpl(WaveFeature wave, DynamicHeightFeature height,
-			MiniMessagesFeature messages, AnalyticsFeature analytics) {
-		super();
-		this.wave = wave;
-		this.height = height;
-		this.messages = messages;
-		this.analytics = analytics;
+	static PortfolioUtils instance = null;
+//	private WaveFeature wave;
+//	private DynamicHeightFeature height;
+//	private MiniMessagesFeature messages;
+//	private AnalyticsFeature analytics;
+
+/*	
+	public String getCurrentDigestId(){
+		String id = wave.getPrivateState().get("digestId");
+		return id != null? id : "";
 	}
-	@Override
+	public void setCurrentDigestId(String id){
+		HashMap<String,String> delta = new HashMap<String, String>();
+		delta.put("digestId", id);
+		wave.getPrivateState().submitDelta(delta);
+	}
+	
+	
 	public String retrUserId() {
 		if(wave != null && wave.getViewer() != null){
 			return wave.getViewer().getId();
@@ -37,106 +36,82 @@ public class PortfolioUtilsImpl implements PortfolioUtils {
 		}
 		
 	}
-	@Override
 	public void adjustHeight(){
 		if(height != null){
 			height.adjustHeight();
 		}
 	}
 	
-	@Override
+	public void adjustHeightDeferred(){
+		height.adjustHeight();
+	}
+	
+	
 	public String retrUserName() {
 		if(wave != null && wave.getViewer() != null){
-			return wave.getHost().getId();
+			return wave.getViewer().getDisplayName();
 		}else{
 			return "";
 		}
 		
 	}
-	@Override
-	public String retrHostId(){
-		if(wave != null && wave.getViewer() != null){
-			return wave.getHost().getId();
-		}else{
-			return "";
-		}
-	}
-	@Override
+	
 	public void alert(String msg) {
 		messages.alert(msg);
 	}	
-	@Override
 	public void showStaticMessage(String msg) {
 		messages.createStaticMessage(msg);
 	}	
-	@Override
 	public void dismissStaticMessage() {
 		messages.dismissStaticMessage();
 	}
-	@Override
 	public void dismissAllStaticMessages() {
 		messages.dismissAllStaticMessages();
 	}
-	@Override
 	public void showSuccessMessage(String msg, int seconds) {
 		messages.showSuccessMessage(msg, seconds);
 	}
-	@Override
 	public void dismissAlert(){
 		messages.dismissAlert();
 	}
-	@Override
+	
 	public WaveFeature getWave() {
 		return wave;
 	}
-	@Override
 	public void setWave(WaveFeature wave) {
-		Log.info("setWave: " + wave);
 		this.wave = wave;
 	}
-	@Override
 	public DynamicHeightFeature getHeight() {
 		return height;
 	}
-	@Override
 	public void setHeight(DynamicHeightFeature height) {
 		this.height = height;
 	}
 
-	@Override
+
 	public void setMiniMessages(MiniMessagesFeature mmFeature) {
 		this.messages = mmFeature;
 		
 	}
 
-	@Override
+
 	public void showTimerMessage(String msg, int seconds) {
 		messages.createTimerMessage(msg, seconds);
 		
 	}
 
-	@Override
+
 	public void setAnalytics(AnalyticsFeature analyticsFeature) {
 		this.analytics = analyticsFeature; 
 	}
 	
 	private final static String ANALYTICS_ID = "UA-13269470-3";
-	@Override
 	public void recordPageView(String typeOfrecord) {
 		analytics.recordPageView(ANALYTICS_ID, typeOfrecord);
 	}
-	@Override
-	public void putToPrivateSate(String key, String value){
-		HashMap<String,String> delta = new HashMap<String, String>();
-		delta.put(key, value);
-		wave.getPrivateState().submitDelta(delta);
-	}
-	@Override
-	public String retrFromPrivateSate(String key){
-		return wave.getPrivateState().get(key);
-	}
+	*/
 	
-	/*
+	
 	public void showStaticMessage(String msg) {
 	}	
 	public void dismissStaticMessage() {
@@ -150,7 +125,7 @@ public class PortfolioUtilsImpl implements PortfolioUtils {
 	}
 	
 	public String retrUserId() {
-		return "vega113";
+		return "vega113@googlewave.com";
 		
 	}
 	public String retrUserName() {
@@ -172,6 +147,10 @@ public class PortfolioUtilsImpl implements PortfolioUtils {
 	public String retrFromPrivateSate(String key){
 		return privateState.get(key);
 	}
-	*/
+	@Override
+	public String retrHostId() {
+		return "vega114@googlewave.com";
+	}
+	
 	
 }

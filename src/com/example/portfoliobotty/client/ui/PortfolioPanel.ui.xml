@@ -10,9 +10,19 @@
 			<g:DecoratorPanel>
 				<g:CaptionPanel ui:field="topCaption" captionText='{constants.gadgetTitleStr}'>
 					<g:VerticalPanel>
+					<g:CaptionPanel captionText='{constants.pleaseRegisterStr}' ui:field="registerCptn">
+						<g:VerticalPanel>
+							<g:cell horizontalAlignment="ALIGN_CENTER">
+								<g:Label text='{constants.registerStr}' stylePrimaryName='{res.globalCSS.warning}'></g:Label>
+							</g:cell>
+							<g:cell horizontalAlignment="ALIGN_CENTER">
+								<g:Button text='{constants.registerBtnStr}' ui:field="registerBtn"></g:Button>
+							</g:cell>
+						</g:VerticalPanel>
+						</g:CaptionPanel>
 						<g:HorizontalPanel>
 							<g:cell horizontalAlignment="ALIGN_CENTER">
-								<g:CaptionPanel captionText='{constants.portfolioDataStr}'>
+								<g:CaptionPanel captionText='{constants.portfolioDataStr}' ui:field="portfolioDataCptn">
 									<g:VerticalPanel ui:field="portfolioDataPanel"></g:VerticalPanel>
 								</g:CaptionPanel>
 							</g:cell>
