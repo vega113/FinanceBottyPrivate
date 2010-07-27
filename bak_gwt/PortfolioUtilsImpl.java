@@ -151,6 +151,12 @@ public class PortfolioUtilsImpl implements PortfolioUtils {
 	public String retrHostId() {
 		return "vega114@googlewave.com";
 	}
+	@Override
+	public void requestNavigateTo(String discussFinanceBottyWaveView,
+			Object object) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 }

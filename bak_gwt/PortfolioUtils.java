@@ -28,6 +28,9 @@ public interface PortfolioUtils {
 	public abstract String retrFromPrivateSate(String key);
 
 	public abstract String retrHostId();
+
+	public abstract void requestNavigateTo(String discussFinanceBottyWaveView,
+			Object object);
 	
 //	public abstract WaveFeature getWave();
 //	public abstract void setWave(WaveFeature wave);
