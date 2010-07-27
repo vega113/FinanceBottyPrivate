@@ -1,5 +1,6 @@
 package com.example.portfoliobotty.server.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +9,8 @@ import javax.jdo.annotations.PrimaryKey;
 
 import com.google.gson.annotations.Expose;
 
-public class Portfolio {
+@SuppressWarnings("serial")
+public class Portfolio implements Serializable{
 	@Persistent
 	@PrimaryKey
 	@Expose

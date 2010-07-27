@@ -1,11 +1,14 @@
 package com.example.portfoliobotty.server.model;
 
+import java.io.Serializable;
+
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
 import com.google.gson.annotations.Expose;
 
-public class Position {
+@SuppressWarnings("serial")
+public class Position implements Serializable{
 	@Persistent
 	@PrimaryKey
 	String positionId;

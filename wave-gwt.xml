@@ -4,6 +4,10 @@
          ================================= -->
 	<target name="backup_gwt" description="backup gwt app configuration">
 		<mkdir dir="./bak_gwt"/>
+		<copy file="./src/com/example/portfoliobotty/client/feature/views/ViewsFeature.java" tofile="./bak_gwt/ViewsFeature.java" overwrite="true">
+		</copy>
+		<copy file="./src/com/example/portfoliobotty/client/feature/views/NeedsViews.java" tofile="./bak_gwt/NeedsViews.java" overwrite="true">
+		</copy>
 		<copy file="./src/com/example/portfoliobotty/client/feature/minimessages/MiniMessagesFeature.java" tofile="./bak_gwt/MiniMessagesFeature.java" overwrite="true">
 		</copy>
 		<copy file="./src/com/example/portfoliobotty/client/feature/minimessages/NeedsMiniMessages.java" tofile="./bak_gwt/NeedsMiniMessages.java" overwrite="true">
@@ -15,7 +19,7 @@
 		<copy file="./src/com/example/portfoliobotty/client/utils/PortfolioUtilsImpl.java" tofile="./bak_gwt/PortfolioUtilsImpl.java" overwrite="true">
 		</copy>
 		<copy file="./src/com/example/portfoliobotty/client/utils/PortfolioUtils.java" tofile="./bak_gwt/PortfolioUtils.java" overwrite="true">
-				</copy>
+		</copy>
 		<copy file="./src/com/example/portfoliobotty/client/PortfolioBotty.java" tofile="./bak_gwt/PortfolioBotty.java" overwrite="true">
 		</copy>
 		<copy file="./src/com/example/portfoliobotty/PortfolioBotty.gwt.xml" tofile="./bak_gwt/PortfolioBotty.gwt.xml" overwrite="true">
@@ -28,6 +32,10 @@
           target: restore_gwt              
          ================================= -->
 	<target name="restore_gwt"  description="restore gwt app configuration">
+		<copy file="./bak_gwt/ViewsFeature.java" tofile="./src/com/example/portfoliobotty/client/feature/views/ViewsFeature.java" overwrite="true">
+		</copy>
+		<copy file="./bak_gwt/NeedsViews.java" tofile="./src/com/example/portfoliobotty/client/feature/views/NeedsViews.java" overwrite="true">
+		</copy>
 		<copy file="./bak_gwt/MiniMessagesFeature.java" tofile="./src/com/example/portfoliobotty/client/feature/minimessages/MiniMessagesFeature.java" overwrite="true">
 		</copy>
 		<copy file="./bak_gwt/NeedsMiniMessages.java" tofile="./src/com/example/portfoliobotty/client/feature/minimessages/NeedsMiniMessages.java" overwrite="true">
@@ -39,7 +47,7 @@
 		<copy file="./bak_gwt/PortfolioUtilsImpl.java" tofile="./src/com/example/portfoliobotty/client/utils/PortfolioUtilsImpl.java" overwrite="true">
 		</copy>
 		<copy file="./bak_gwt/PortfolioUtils.java" tofile="./src/com/example/portfoliobotty/client/utils/PortfolioUtils.java" overwrite="true">
-				</copy>
+		</copy>
 		<copy file="./bak_gwt/PortfolioBotty.java" tofile="./src/com/example/portfoliobotty/client/PortfolioBotty.java" overwrite="true">
 		</copy>
 		<copy file="./bak_gwt/PortfolioBotty.gwt.xml" tofile="./src/com/example/portfoliobotty/PortfolioBotty.gwt.xml" overwrite="true">
@@ -53,6 +61,10 @@
 		          target: backup_wave              
 		         ================================= -->
 	<target name="backup_wave" description="backup wave app configuration">
+		<copy file="./src/com/example/portfoliobotty/client/feature/views/ViewsFeature.java" tofile="./bak_wave/ViewsFeature.java" overwrite="true">
+		</copy>
+		<copy file="./src/com/example/portfoliobotty/client/feature/views/NeedsViews.java" tofile="./bak_wave/NeedsViews.java" overwrite="true">
+		</copy>
 		<copy file="./src/com/example/portfoliobotty/client/feature/minimessages/MiniMessagesFeature.java" tofile="./bak_wave/MiniMessagesFeature.java" overwrite="true">
 		</copy>
 		<copy file="./src/com/example/portfoliobotty/client/feature/minimessages/NeedsMiniMessages.java" tofile="./bak_wave/NeedsMiniMessages.java" overwrite="true">
@@ -64,7 +76,7 @@
 		<copy file="./src/com/example/portfoliobotty/client/utils/PortfolioUtilsImpl.java" tofile="./bak_wave/PortfolioUtilsImpl.java" overwrite="true">
 		</copy>
 		<copy file="./src/com/example/portfoliobotty/client/utils/PortfolioUtils.java" tofile="./bak_wave/PortfolioUtils.java" overwrite="true">
-				</copy>
+		</copy>
 		<copy file="./src/com/example/portfoliobotty/client/PortfolioBotty.java" tofile="./bak_wave/PortfolioBotty.java" overwrite="true">
 		</copy>
 		<copy file="./src/com/example/portfoliobotty/PortfolioBotty.gwt.xml" tofile="./bak_wave/PortfolioBotty.gwt.xml" overwrite="true">
@@ -76,6 +88,10 @@
 	         ================================= -->
 	<target name="restore_wave"  description="restore wave app configuration">
 		<mkdir dir="./bak_wave"/>
+		<copy file="./bak_wave/ViewsFeature.java" tofile="./src/com/example/portfoliobotty/client/feature/views/ViewsFeature.java" overwrite="true">
+		</copy>
+		<copy file="./bak_wave/NeedsViews.java" tofile="./src/com/example/portfoliobotty/client/feature/views/NeedsViews.java" overwrite="true">
+		</copy>
 		<copy file="./bak_wave/MiniMessagesFeature.java" tofile="./src/com/example/portfoliobotty/client/feature/minimessages/MiniMessagesFeature.java" overwrite="true">
 		</copy>
 		<copy file="./bak_wave/NeedsMiniMessages.java" tofile="./src/com/example/portfoliobotty/client/feature/minimessages/NeedsMiniMessages.java" overwrite="true">
@@ -87,7 +103,7 @@
 		<copy file="./bak_wave/PortfolioUtilsImpl.java" tofile="./src/com/example/portfoliobotty/client/utils/PortfolioUtilsImpl.java" overwrite="true">
 		</copy>
 		<copy file="./bak_wave/PortfolioUtils.java" tofile="./src/com/example/portfoliobotty/client/utils/PortfolioUtils.java" overwrite="true">
-				</copy>
+		</copy>
 		<copy file="./bak_wave/PortfolioBotty.java" tofile="./src/com/example/portfoliobotty/client/PortfolioBotty.java" overwrite="true">
 		</copy>
 		<copy file="./bak_wave/PortfolioBotty.gwt.xml" tofile="./src/com/example/portfoliobotty/PortfolioBotty.gwt.xml" overwrite="true">

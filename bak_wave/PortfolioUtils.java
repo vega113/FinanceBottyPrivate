@@ -9,10 +9,18 @@ import com.google.gwt.gadgets.client.DynamicHeightFeature;
 
 public interface PortfolioUtils {
 
+	/**
+	 * show new static message
+	 * @param msg
+	 */
 	public abstract void showStaticMessage(String msg);
-
+	/**
+	 * dismiss the last shown static message 
+	 */
 	public abstract void dismissStaticMessage();
-
+	/**
+	 * dismiss all shown static message 
+	 */
 	public abstract void dismissAllStaticMessages();
 
 	public abstract void showSuccessMessage(String msg, int seconds);
@@ -43,5 +51,7 @@ public interface PortfolioUtils {
 	public abstract String retrHostId();
 
 	public abstract void showTimerMessage(String msg, int seconds);
+
+	public abstract void requestNavigateTo(String view, String optParams);
 
 }

@@ -27,6 +27,7 @@ import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.CaptionPanel;
 import com.google.gwt.user.client.ui.Composite;
@@ -69,6 +70,9 @@ public class PortfolioPanel extends Composite {
 	@UiField
 	Button registerBtn;
 	
+	@UiField
+	Anchor discussFinanceBottyAnchor;
+	
 	private final Map<String,JSONValue> jsonResultMap =  new HashMap<String, JSONValue>();
 	
 	
@@ -76,6 +80,19 @@ public class PortfolioPanel extends Composite {
 	public PortfolioPanel(final PortfolioService service, final PortfolioUtils utils, final PortfolioConstants constants, final PortfolioMessages messages, final GlobalResources resources) {
 		this.utils = utils;
 		initWidget(uiBinder.createAndBindUi(this));
+		
+		discussFinanceBottyAnchor.setHref("#");
+		discussFinanceBottyAnchor.setText("Discuss FinanceBotty");
+		discussFinanceBottyAnchor.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				utils.requestNavigateTo(constants.discussFinanceBottyWaveView(), null);
+			}
+		});
+		
+		utils.recordPageView("/" + utils.retrHostId() + "/" + utils.retrUserId());
+		
 		registerCptn.setVisible(false);
 		portfoliosList.addChangeHandler(new ChangeHandler() {
 			
@@ -86,14 +103,10 @@ public class PortfolioPanel extends Composite {
 				utils.putToPrivateSate("portfolioId", value);
 			}
 		});
+		utils.showStaticMessage(constants.loadingFinanceDataFirstTime());
+		hideDataCaptions();
+		loadFinanceData(service, utils, constants, messages, resources, utils.retrHostId());
 		//load the UI first, defer the portfolio data loading
-		DeferredCommand.addCommand(new Command() {
-			
-			@Override
-			public void execute() {
-				loadFinanceData(service, utils, constants, messages, resources, utils.retrHostId());
-			}
-		});
 		Timer timer = new Timer() {
 			
 			@Override
@@ -102,8 +115,7 @@ public class PortfolioPanel extends Composite {
 				loadFinanceData(service, utils, constants, messages, resources, utils.retrHostId());
 			}
 		};
-		timer.schedule(1000);
-		timer.scheduleRepeating(20000);
+		timer.scheduleRepeating(29000);//repeating
 	}
 
 
@@ -113,12 +125,14 @@ public class PortfolioPanel extends Composite {
 			final PortfolioMessages messages, final GlobalResources resources,
 			String user) {
 		try {
-			utils.showStaticMessage(constants.updatingStr() + ", host: " + user);
+			utils.dismissAllStaticMessages();
+			utils.showStaticMessage(constants.updatingStr());
 			service.retrPortfolios(user, new AsyncCallback<JSONValue>() {
 				
 				@Override
 				public void onSuccess(JSONValue result) {
 					Log.debug("entering onSuccess");
+					showDataCaptions();
 					utils.dismissStaticMessage();
 					jsonResultMap.put("result",result);
 					JSONArray portfolios = (JSONArray)jsonResultMap.get("result");
@@ -143,12 +157,13 @@ public class PortfolioPanel extends Composite {
 					if(caught.getMessage() != null && caught.getMessage().indexOf("NO_USER") > -1){
 						hideDataCaptions();
 						registerCptn.setVisible(true);
+						utils.adjustHeight();
 						registerBtn.addClickHandler(new ClickHandler() {
 							
 							@Override
 							public void onClick(ClickEvent event) {
-//								Window.open("http://" + constants.appdomain() + ".appspot.com/LoginServlet?user=" + utils.retrHostId(), "", "");
-								Window.open("http://localhost:8888/LoginServlet?user=" + utils.retrHostId(), "", "");
+								Window.open("http://" + constants.appdomain() + ".appspot.com/LoginServlet?user=" + utils.retrHostId(), "", "");
+//								Window.open("http://localhost:8888/LoginServlet?user=" + utils.retrHostId(), "", "");
 							}
 						});
 					}else{
@@ -195,6 +210,7 @@ public class PortfolioPanel extends Composite {
 		}catch(Exception e){
 			Log.error("", e);
 		}
+		utils.adjustHeight();
 	}
 
 
@@ -246,6 +262,7 @@ public class PortfolioPanel extends Composite {
 
 	protected void populatePositions(GlobalResources resources,PortfolioConstants constants,
 			FlexTable flexTable, JSONArray portfolios){
+		registerCptn.setVisible(false);
 		NumberFormat fmt = NumberFormat.getFormat("###.##");
 		int size = portfolios.size();
 		try{
@@ -320,6 +337,7 @@ public class PortfolioPanel extends Composite {
 	protected void loadPortfoliosPanel(final PortfolioConstants constants,
 			final PortfolioMessages messages, final GlobalResources resources) {
 		try{
+			topCaption.setCaptionHTML(messages.gadgetTitleMsg(utils.retrUserName()));
 			portfolioDataPanel.clear();
 			positionsTableHeaderPanel.clear();
 			positionsTableDataPanel.clear();
@@ -342,5 +360,10 @@ public class PortfolioPanel extends Composite {
 		portfolioDataCptn.setVisible(false);
 		choosePortfolioCptn.setVisible(false);
 		positionsDataCptn.setVisible(false);
+	}
+	private void showDataCaptions(){
+		portfolioDataCptn.setVisible(true);
+		choosePortfolioCptn.setVisible(true);
+		positionsDataCptn.setVisible(true);
 	}
 }

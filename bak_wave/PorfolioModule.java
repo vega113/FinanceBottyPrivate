@@ -5,6 +5,7 @@ import org.cobogw.gwt.waveapi.gadget.client.WaveFeature;
 import com.allen_sauer.gwt.log.client.Log;
 import com.example.portfoliobotty.client.PortfolioBotty;
 import com.example.portfoliobotty.client.feature.minimessages.MiniMessagesFeature;
+import com.example.portfoliobotty.client.feature.views.ViewsFeature;
 import com.example.portfoliobotty.client.request.GwtRequestServiceImpl;
 import com.example.portfoliobotty.client.request.RequestService;
 import com.example.portfoliobotty.client.request.WaveRequestServiceImpl;
@@ -38,5 +39,6 @@ public class PorfolioModule extends AbstractGinModule {
     bind(AnalyticsFeature.class).toProvider(PortfolioBotty.AnalyticsFeatureProvider.class).in(Singleton.class);
     bind(MiniMessagesFeature.class).toProvider(PortfolioBotty.MiniMessagesFeatureProvider.class).in(Singleton.class);
     bind(DynamicHeightFeature.class).toProvider(PortfolioBotty.DynamicHeightFeatureProvider.class).in(Singleton.class);
+    bind(ViewsFeature.class).toProvider(PortfolioBotty.ViewsFeatureProvider.class).in(Singleton.class);
   }
 }

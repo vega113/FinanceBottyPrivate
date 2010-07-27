@@ -41,9 +41,15 @@ public interface PortfolioConstants extends Constants {
 	String pleaseRegisterStr();
 	String registerBtnStr();
 	
+	String loadingFinanceDataFirstTime();
+	
 	@DefaultStringValue(value="financebotty")
 	String appdomain();
 	
 	@DefaultStringValue(value="60px")
 	String cellWidth();
+	@DefaultStringValue(value="#restored:wave:googlewave.com%252Fw%252BCdY5yLZkCli")
+	String discussFinanceBottyWaveView();
+	@DefaultStringValue(value="UA-13269470-4")
+	String ANALYTICS_ID();
 }

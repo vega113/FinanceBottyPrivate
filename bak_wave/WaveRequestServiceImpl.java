@@ -6,6 +6,7 @@ import org.cobogw.gwt.waveapi.gadget.client.StateUpdateEvent;
 import org.cobogw.gwt.waveapi.gadget.client.StateUpdateEventHandler;
 import org.cobogw.gwt.waveapi.gadget.client.WaveFeature;
 import com.allen_sauer.gwt.log.client.Log;
+import com.example.portfoliobotty.client.utils.PortfolioUtils;
 import com.google.gwt.core.client.JavaScriptException;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArrayString;
@@ -18,12 +19,14 @@ import com.google.inject.Inject;
 
 
 public class WaveRequestServiceImpl implements RequestService {
+	private PortfolioUtils utils;
 	private WaveFeature wave;
 	
 	@Inject
-	public WaveRequestServiceImpl(WaveFeature wave){
+	public WaveRequestServiceImpl(PortfolioUtils utils, WaveFeature wave){
+		this.utils = utils;
 		this.wave = wave;
-		wave.addStateUpdateEventHandler(stateUpdateEventHandler);
+		utils.getWave().addStateUpdateEventHandler(stateUpdateEventHandler);
 	}
 	
 	StateUpdateEventHandler stateUpdateEventHandler = new StateUpdateEventHandler() {
@@ -87,7 +90,11 @@ public class WaveRequestServiceImpl implements RequestService {
 			}
 			String user = null;
 			try{
-				user = wave.getViewer().getId();
+				user = utils.retrUserId();
+				if("".equals(user)){
+					Log.warn("no viewer!");
+					return;
+				}
 			}catch (Exception e) {
 				Log.warn("no viewer!");
 				return;

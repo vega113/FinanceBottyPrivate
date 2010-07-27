@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <appengine-web-app xmlns="http://appengine.google.com/ns/1.0">
   <application>financebotty</application>
-  <version>1</version>
+  <version>2</version>
 
   <!-- Configure serving/caching of GWT files -->
   
@@ -12,7 +12,9 @@
     <property name="OAUTH_TOKEN" value="AOijR2d4C__TTOeeeGX0QjlapxcjCKo028VDDLmysl3P6zQZFR4DxyXoP3uxd9Q4tjoF6eXFJ02dRcgR-Pnd7bjNJqcl2lhOIcrUnVUlnPeUYx5HYrCB2EcjcGfp-6rymLKgkZL09dj5Ptdaa_Ouy0zG8t4rgYyZeg=="/>
     <property name="OAUTH_KEY" value="28373163661"/> 
     <property name="OAUTH_SECRET" value="hFtj0kR0oMvW6M8dxhGTUxOL"/> 
-    <property name="SECURITY_TOKEN" value="8543"/>         
+    <property name="SECURITY_TOKEN" value="8543"/>    
+         
+     <property name="FINANCEBOTTY_ICON_URL" value="http:financebotty.appspot.com/images/financbotty_icon.jpg"/> 
   
   	 <property name="com.google.gdata.DisableCookieHandler" value="true"/>
     <property name="java.util.logging.config.file" value="WEB-INF/logging.properties"/>

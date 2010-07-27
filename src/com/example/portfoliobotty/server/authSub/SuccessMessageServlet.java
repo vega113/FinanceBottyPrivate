@@ -47,7 +47,9 @@ public class SuccessMessageServlet extends HttpServlet {
 				resp.getWriter().print("Error, please retry!");
 				resp.getWriter().flush();
 			}else{
-				resp.getWriter().print("User " + principal + " is successfully registered! You can reload the gadget now and access your portfolio.");
+				resp.getWriter().print("<html><head><title>Successfully registered!</title></head><body>");
+				resp.getWriter().print("<h4>User <b>" + principal + "</b> is successfully registered! <br>It will take about a minute untill gadget will fetch your data from Google Finance. You can close this window now.</h4> ");
+				resp.getWriter().print("</body></html>");
 				resp.getWriter().flush();
 			}
 		}catch (JSONException e) {

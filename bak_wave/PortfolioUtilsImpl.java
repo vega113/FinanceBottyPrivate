@@ -3,7 +3,9 @@ package com.example.portfoliobotty.client.utils;
 import org.cobogw.gwt.waveapi.gadget.client.WaveFeature;
 
 import com.allen_sauer.gwt.log.client.Log;
+import com.example.portfoliobotty.client.constants.PortfolioConstants;
 import com.example.portfoliobotty.client.feature.minimessages.MiniMessagesFeature;
+import com.example.portfoliobotty.client.feature.views.ViewsFeature;
 import com.google.gwt.gadgets.client.AnalyticsFeature;
 import com.google.gwt.gadgets.client.DynamicHeightFeature;
 import java.util.HashMap;
@@ -17,17 +19,26 @@ public class PortfolioUtilsImpl implements PortfolioUtils {
 	private DynamicHeightFeature height;
 	private MiniMessagesFeature messages;
 	private AnalyticsFeature analytics;
-	
+	private ViewsFeature views;
+	private PortfolioConstants constants;
 	
 	@Inject
 	public PortfolioUtilsImpl(WaveFeature wave, DynamicHeightFeature height,
-			MiniMessagesFeature messages, AnalyticsFeature analytics) {
-		super();
+			MiniMessagesFeature messages, AnalyticsFeature analytics, ViewsFeature views, PortfolioConstants constants) {
 		this.wave = wave;
 		this.height = height;
 		this.messages = messages;
 		this.analytics = analytics;
+		this.views = views;
+		this.constants = constants;
 	}
+	@Override
+	public void adjustHeight(){
+		if(height != null){
+			height.adjustHeight();
+		}
+	}
+	
 	@Override
 	public String retrUserId() {
 		if(wave != null && wave.getViewer() != null){
@@ -38,16 +49,9 @@ public class PortfolioUtilsImpl implements PortfolioUtils {
 		
 	}
 	@Override
-	public void adjustHeight(){
-		if(height != null){
-			height.adjustHeight();
-		}
-	}
-	
-	@Override
 	public String retrUserName() {
 		if(wave != null && wave.getViewer() != null){
-			return wave.getHost().getId();
+			return wave.getViewer().getDisplayName();
 		}else{
 			return "";
 		}
@@ -55,7 +59,7 @@ public class PortfolioUtilsImpl implements PortfolioUtils {
 	}
 	@Override
 	public String retrHostId(){
-		if(wave != null && wave.getViewer() != null){
+		if(wave != null && wave.getHost() != null){
 			return wave.getHost().getId();
 		}else{
 			return "";
@@ -120,10 +124,9 @@ public class PortfolioUtilsImpl implements PortfolioUtils {
 		this.analytics = analyticsFeature; 
 	}
 	
-	private final static String ANALYTICS_ID = "UA-13269470-3";
 	@Override
 	public void recordPageView(String typeOfrecord) {
-		analytics.recordPageView(ANALYTICS_ID, typeOfrecord);
+		analytics.recordPageView(constants.ANALYTICS_ID(), typeOfrecord);
 	}
 	@Override
 	public void putToPrivateSate(String key, String value){
@@ -134,6 +137,10 @@ public class PortfolioUtilsImpl implements PortfolioUtils {
 	@Override
 	public String retrFromPrivateSate(String key){
 		return wave.getPrivateState().get(key);
+	}
+	@Override
+	public void requestNavigateTo(String view,String optParams){
+		views.requestNavigateTo(view, optParams);
 	}
 	
 	/*

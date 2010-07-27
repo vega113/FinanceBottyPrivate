@@ -19,6 +19,7 @@ import com.example.portfoliobotty.server.dao.TokenDao;
 import com.example.portfoliobotty.server.dao.TokenDaoImpl;
 import com.example.portfoliobotty.server.finance.service.GFinanceService;
 import com.example.portfoliobotty.server.finance.service.GFinanceServiceImpl;
+import com.example.portfoliobotty.server.install.InstallGadgetServlet;
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -40,7 +41,7 @@ public class GuiceServletConfig extends GuiceServletContextListener {
     	  serve("/command/jsonrpc").with(JsonRpcProcessor.class);
     	  //        serve("/feeds/json").with(JsonGenerator.class);
     	  //        serve("/feeds/atom").with(AtomGenerator.class);       
-    	  //        serve("/installNew").with(InstallServlet.class); 
+    	          serve("/installGadget").with(InstallGadgetServlet.class); 
     	  serve("/LoginServlet").with(LoginServlet.class) ; 
     	  serve("/HandleTokenServlet").with(HandleTokenServlet.class); 
     	  serve("/SuccessMessageServlet").with(SuccessMessageServlet.class); 

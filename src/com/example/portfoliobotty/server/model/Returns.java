@@ -1,5 +1,7 @@
 package com.example.portfoliobotty.server.model;
 
+import java.io.Serializable;
+
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.PersistenceCapable;
@@ -7,8 +9,9 @@ import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
 import com.google.gson.annotations.Expose;
+@SuppressWarnings("serial")
 @PersistenceCapable(identityType = IdentityType.APPLICATION, detachable = "true")
-public class Returns {
+public class Returns implements Serializable{
 	@Persistent(valueStrategy=IdGeneratorStrategy.IDENTITY)
 	@PrimaryKey
 	long key;

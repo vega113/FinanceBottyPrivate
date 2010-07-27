@@ -10,5 +10,5 @@ import com.google.gwt.i18n.client.Messages;
  * explicit binding: Gin will internallt call GWT.create on the requested type.
  */
 public interface PortfolioMessages extends Messages {
-
+	String gadgetTitleMsg(String userName);
 }

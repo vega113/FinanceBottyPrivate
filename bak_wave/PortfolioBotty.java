@@ -7,6 +7,8 @@ import com.allen_sauer.gwt.log.client.DivLogger;
 import com.allen_sauer.gwt.log.client.Log;
 import com.example.portfoliobotty.client.feature.minimessages.MiniMessagesFeature;
 import com.example.portfoliobotty.client.feature.minimessages.NeedsMiniMessages;
+import com.example.portfoliobotty.client.feature.views.NeedsViews;
+import com.example.portfoliobotty.client.feature.views.ViewsFeature;
 import com.example.portfoliobotty.client.inject.PortfolioGinjector;
 import com.example.portfoliobotty.client.ui.PortfolioPanel;
 import com.google.gwt.core.client.EntryPoint;
@@ -17,6 +19,7 @@ import com.google.gwt.gadgets.client.NeedsAnalytics;
 import com.google.gwt.gadgets.client.NeedsDynamicHeight;
 import com.google.gwt.gadgets.client.UserPreferences;
 import com.google.gwt.gadgets.client.Gadget.ModulePrefs;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.inject.Provider;
@@ -26,7 +29,7 @@ import com.google.inject.Provider;
  */
 //public class DigestBottyGadget implements EntryPoint {
 @ModulePrefs(title = "Wave Google Finance",author="Yuri Zelikov",author_email="vega113+financebotty@gmail.com", width=600, height=600)
-public class PortfolioBotty extends WaveGadget<UserPreferences> implements NeedsDynamicHeight, NeedsMiniMessages, NeedsAnalytics{
+public class PortfolioBotty extends WaveGadget<UserPreferences> implements NeedsDynamicHeight, NeedsMiniMessages, NeedsAnalytics, NeedsViews{
 
 	/**
 	 * This is the entry point method.
@@ -53,12 +56,18 @@ public class PortfolioBotty extends WaveGadget<UserPreferences> implements Needs
 		Log.info("init PortfolioBotty");
 		PortfolioBotty.waveFeature = getWave();
 		mmFeature.initMiniMessagesFeature();
-		
-		PortfolioGinjector ginjector = GWT.create(PortfolioGinjector.class);
-		ginjector.getResources().globalCSS().ensureInjected();
-		PortfolioPanel widget = ginjector.getPortfolioPanel();
-		dhFeature.getContentDiv().add(widget);
-		
+		viewsFeature.initViewsFeature();
+		Timer t = new Timer() {
+			
+			@Override
+			public void run() {
+				PortfolioGinjector ginjector = GWT.create(PortfolioGinjector.class);
+				ginjector.getResources().globalCSS().ensureInjected();
+				PortfolioPanel widget = ginjector.getPortfolioPanel();
+				dhFeature.getContentDiv().add(widget);
+			}
+		};
+		t.schedule(1000);
 	    initRemoteLogger(RootPanel.get());
 	}
 	
@@ -75,6 +84,12 @@ public class PortfolioBotty extends WaveGadget<UserPreferences> implements Needs
 	@Override
 	public void initializeFeature(MiniMessagesFeature feature) {
 		PortfolioBotty.mmFeature = feature;
+	}
+	
+	static private ViewsFeature viewsFeature;
+	@Override
+	public void initializeFeature(ViewsFeature feature) {
+		PortfolioBotty.viewsFeature = feature;
 	}
 	
 	static private AnalyticsFeature analyticsFeature;
@@ -112,6 +127,14 @@ public class PortfolioBotty extends WaveGadget<UserPreferences> implements Needs
 		public WaveFeature get() {
 			Log.info("Providing WaveFeature");
 			return PortfolioBotty.waveFeature;
+		}
+	}
+	
+	public static class ViewsFeatureProvider implements Provider<ViewsFeature>{
+		@Override
+		public ViewsFeature get() {
+			Log.info("Providing ViewsFeature");
+			return PortfolioBotty.viewsFeature;
 		}
 	}
 }
