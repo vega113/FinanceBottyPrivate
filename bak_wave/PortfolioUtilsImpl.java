@@ -68,26 +68,32 @@ public class PortfolioUtilsImpl implements PortfolioUtils {
 	@Override
 	public void alert(String msg) {
 		messages.alert(msg);
+		height.adjustHeight();
 	}	
 	@Override
 	public void showStaticMessage(String msg) {
 		messages.createStaticMessage(msg);
+		height.adjustHeight();
 	}	
 	@Override
 	public void dismissStaticMessage() {
 		messages.dismissStaticMessage();
+		height.adjustHeight();
 	}
 	@Override
 	public void dismissAllStaticMessages() {
 		messages.dismissAllStaticMessages();
+		height.adjustHeight();
 	}
 	@Override
 	public void showSuccessMessage(String msg, int seconds) {
 		messages.showSuccessMessage(msg, seconds);
+		height.adjustHeight();
 	}
 	@Override
 	public void dismissAlert(){
 		messages.dismissAlert();
+		height.adjustHeight();
 	}
 	@Override
 	public WaveFeature getWave() {
